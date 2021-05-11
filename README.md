@@ -5,7 +5,7 @@
 * Delete Tasks
 * Note the state of task as "complete"
 * Everything is saved to user's local storage (task info is reatained even after refresh)
-
+* Responsive on all devices
 
 ## Future "to-do" :/ - stuff to add 
 * Drag (Ability to reorder tasks)
