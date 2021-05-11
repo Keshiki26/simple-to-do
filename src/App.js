@@ -1,9 +1,8 @@
 import './App.css';
-import { Grid, Container, Typography } from '@material-ui/core';
-import { Route } from 'react-router-dom';
+import { Grid, Typography } from '@material-ui/core';
 import Add from './Components/Add';
 import EachNode from './Components/Elements/EachNode';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Draggable } from 'react-drag-reorder';
 
 function App() {
@@ -15,7 +14,6 @@ function App() {
 		setToDos([...toDos, thisTask]);
 		localStorage.setItem('tasks', JSON.stringify([...toDos, thisTask]));
 	};
-
 	const deleteToDo = (i) => {
 		const newTasks = toDos.filter((element, index) => index !== i);
 		setToDos(newTasks);
@@ -27,7 +25,17 @@ function App() {
 		localStorage.setItem('tasks', JSON.stringify(toDos));
 		console.log(toDos[i]);
 	};
-	const toDoItems = toDos.map((toDo, i) => (
+
+	const dragCallBack = (a) => {
+		let av = [];
+		for (let i = 0; i < a.length; i++) {
+			av.push(toDos[a[i].key]);
+		}
+		setToDos(av);
+		localStorage.setItem('tasks', JSON.stringify(av));
+	};
+
+	let toDoItems = toDos.map((toDo, i) => (
 		<EachNode
 			key={i}
 			index={i}
@@ -57,9 +65,10 @@ function App() {
 					</Typography>
 				)}
 			</Grid>
-			<Grid xs="12">
-				<Draggable>{toDoItems}</Draggable>
-			</Grid>
+			{/* <Grid xs="12">
+				<Draggable dragCallBack={dragCallBack}>{toDoItems}</Draggable>
+			</Grid> */}
+			{toDoItems}
 		</Grid>
 	);
 }

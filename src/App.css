@@ -19,4 +19,5 @@
 .task-text {
 	font-size: 1.2em !important;
 	text-decoration-color: #f50057 !important;
+	text-decoration-thickness: 4px !important;
 }

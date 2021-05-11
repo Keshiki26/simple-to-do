@@ -8,7 +8,7 @@ function EachNode(props) {
 	const [finished, setFinished] = useState(props.status);
 
 	return (
-		<Grid direction="row" container className="each-to-do">
+		<Grid direction="row" container className="each-to-do" key={props.key}>
 			<Grid xs="3" align="center" className="each-to-do-icon">
 				{' '}
 				{finished ? (
