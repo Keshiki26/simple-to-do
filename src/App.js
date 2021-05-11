@@ -11,8 +11,9 @@ function App() {
 		JSON.parse(localStorage.getItem('tasks')) || []
 	);
 	const submitAction = (t) => {
-		setToDos([...toDos, t]);
-		localStorage.setItem('tasks', JSON.stringify([...toDos, t]));
+		const thisTask = { title: t, status: false };
+		setToDos([...toDos, thisTask]);
+		localStorage.setItem('tasks', JSON.stringify([...toDos, thisTask]));
 	};
 
 	const deleteToDo = (i) => {
@@ -20,8 +21,21 @@ function App() {
 		setToDos(newTasks);
 		localStorage.setItem('tasks', JSON.stringify(newTasks));
 	};
+	const changeItemStatus = (i, status) => {
+		toDos[i].status = status;
+		setToDos(toDos);
+		localStorage.setItem('tasks', JSON.stringify(toDos));
+		console.log(toDos[i]);
+	};
 	const toDoItems = toDos.map((toDo, i) => (
-		<EachNode index={i} toDo={toDo} delete={deleteToDo} />
+		<EachNode
+			key={i}
+			index={i}
+			toDo={toDo.title}
+			delete={deleteToDo}
+			status={toDo.status}
+			changeStatus={changeItemStatus}
+		/>
 	));
 	return (
 		<Grid justify="center" container direction="row">
@@ -43,10 +57,7 @@ function App() {
 					</Typography>
 				)}
 			</Grid>
-			<Grid xs="12">
-				<Draggable>{toDoItems}</Draggable>
-				{console.log(toDoItems)}
-			</Grid>
+			<Grid xs="12">{toDoItems}</Grid>
 		</Grid>
 	);
 }

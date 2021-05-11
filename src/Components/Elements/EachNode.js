@@ -5,7 +5,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 function EachNode(props) {
-	const [finished, setFinished] = useState(false);
+	const [finished, setFinished] = useState(props.status);
 
 	return (
 		<Grid direction="row" container className="each-to-do">
@@ -15,12 +15,18 @@ function EachNode(props) {
 					<CheckCircleIcon
 						fontSize="large"
 						color="secondary"
-						onClick={(e) => setFinished(false)}
+						onClick={(e) => {
+							setFinished(false);
+							props.changeStatus(props.index, false);
+						}}
 					></CheckCircleIcon>
 				) : (
 					<CheckCircleOutlineIcon
 						fontSize="large"
-						onClick={(e) => setFinished(true)}
+						onClick={(e) => {
+							setFinished(true);
+							props.changeStatus(props.index, true);
+						}}
 					></CheckCircleOutlineIcon>
 				)}
 			</Grid>
