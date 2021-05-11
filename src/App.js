@@ -57,7 +57,9 @@ function App() {
 					</Typography>
 				)}
 			</Grid>
-			<Grid xs="12">{toDoItems}</Grid>
+			<Grid xs="12">
+				<Draggable>{toDoItems}</Draggable>
+			</Grid>
 		</Grid>
 	);
 }
